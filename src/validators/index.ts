@@ -8,12 +8,13 @@ export const validateRequestBody = (schema:AnyZodObject) => {
             await schema.parseAsync(req.body)
             console.log('request body is validated succcessfully');
         }catch(error){
-           return res.status(400).json({
+            res.status(400).json({
             success:false,
             message: "invalid schema",
             error:error
            })
         }
+        next();
     }
 }
 
@@ -23,7 +24,7 @@ export const validateQueryParams = (schema:AnyZodObject) => {
             await schema.parseAsync(req.query)
             console.log('Query params is validated succcessfully');
         }catch(error){
-           return res.status(400).json({
+            res.status(400).json({
             success:false,
             message: "invalid schema",
             error:error
