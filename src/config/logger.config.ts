@@ -2,8 +2,7 @@
 import winston from "winston"
 import { getCorrelationId } from "../utils/helpers/request.helpers";
 import DailyRotateFile from 'winston-daily-rotate-file'
-
-
+import { MongoDB } from "winston-mongodb";
 
 const logger = winston.createLogger({
     format: winston.format.combine(
@@ -23,9 +22,19 @@ const logger = winston.createLogger({
         datePattern: 'YYYY-MM-DD',
         maxSize: '20m',
         maxFiles: '14d'
-        })
+        }),
+
+       
 
         // TODO: add logic to integrate and save logs in mongodb
+        // new MongoDB({
+        //     db: String(process.env.MONGO_URI) || 'mongodb://localhost:27017/logs_db',
+        //     options: {
+        //       useUnifiedTopology: true,
+        //     },
+        //     collection: 'log_entries',
+        //     tryReconnect: true,
+        //   })
         
     ] 
 })
